@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <title th:text="${title}"></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+
+<nav th:replace="fragments::navbar"></nav>
+
+<div class="container">
+<h1 th:text="${title}"></h1>
+<hr>
+<table class="table">
+    <thead>
+    <tr>
+        
+        <th scope="col">Nombre</th>
+        <th scope="col">precio</th>
+        <th scope="col">Opciones</th>
+       
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${listaProductos}">
+        <td th:text="${p.nombre}"></td>
+        <td th:text="|$${p.precio}|"></td>
+        <td class="col-md-4 px-md-2 d-flex justify-content-around w-100">
+                    <a class="btn btn-secondary btn-sm" th:href="@{/producto/modificar/__${p.id}__}">Editar</a>
+                     <form th:action="@{/producto/eliminar/__${p.id}__}" method="post">
+                        <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                    </form>
+                </td>
+        
+    </tr>
+
+    </tbody>
+</table>
+
+<br>
+ <a th:href="@{/producto/crear}" style="color:black;"><button type="button" class="btn btn-primary"> Crear producto </button></a>
+
+ </div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
